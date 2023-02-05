@@ -29,7 +29,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/ilgiz-ayupov/job-listings](https://github.com/ilgiz-ayupov/job-listings)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://job-listings-seven.vercel.app/](https://job-listings-seven.vercel.app/)
 
 ## My process
 
