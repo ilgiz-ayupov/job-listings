@@ -26,6 +26,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   // Handlers
   const addFilterHandler = (name: string) => {
     dispatch(addFilter({ name }));
+    window.scroll(0, 0);
   };
 
   return (
@@ -48,7 +49,9 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           <div className="mb-1 flex items-center">
             <a
               className="font-bold text-cyan-600 transition-colors hover:text-cyan-900"
-              href="/"
+              href={`https://www.google.com/search?q=${job.company}`}
+              target="_blank"
+              rel="noreferrer"
             >
               {job.company}
             </a>
@@ -68,8 +71,10 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           </div>
           <div className="mb-1">
             <a
-              href="/"
+              href={`https://www.google.com/search?q=${job.position}`}
               className="text-lg font-bold transition-colors hover:text-cyan-600"
+              target="_blank"
+              rel="noreferrer"
             >
               {job.position}
             </a>

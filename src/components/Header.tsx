@@ -6,7 +6,7 @@ import { ReactComponent as HeaderBgDesktop } from "assets/images/bg-header-deskt
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-cyan-600">
+    <header className="bg-cyan-600 mb-8">
       <HeaderBgMobile className="w-full xs:hidden" />
       <HeaderBgDesktop className="hidden w-full xs:block" />
     </header>
