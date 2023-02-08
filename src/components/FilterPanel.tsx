@@ -18,9 +18,6 @@ import Chip from "UI/Chip";
 const FilterPanel: React.FC = () => {
   const filters = useAppSelector(selectAllFilters);
   const dispatch = useAppDispatch();
-  if (filters.length === 0) {
-    return null;
-  }
 
   // Handlers
   const removeFilterHandler = (id: string) => {
@@ -31,20 +28,21 @@ const FilterPanel: React.FC = () => {
     dispatch(clearFilters());
   };
 
-  return (
+  // Elements
+  const filtersElements = filters.map((filter) => (
+    <Chip
+      key={filter.id}
+      text={filter.name}
+      variant="clearable"
+      onClick={() => removeFilterHandler(filter.id)}
+    />
+  ));
+
+  return filters.length !== 0 ? (
     <div id="filter-panel">
       <div className="container mx-auto px-5">
         <div className="flex items-center justify-between gap-10 rounded-md bg-white px-6 py-6 shadow-lg shadow-cyan-600/25">
-          <Stack className="flex flex-wrap gap-3">
-            {filters.map((filter) => (
-              <Chip
-                key={filter.id}
-                text={filter.name}
-                variant="clearable"
-                onClick={() => removeFilterHandler(filter.id)}
-              />
-            ))}
-          </Stack>
+          <Stack className="flex flex-wrap gap-3">{filtersElements}</Stack>
 
           <button
             className="text-lg text-cyan-600 hover:underline"
@@ -55,7 +53,7 @@ const FilterPanel: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default FilterPanel;

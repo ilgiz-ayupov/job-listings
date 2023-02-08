@@ -3,12 +3,14 @@ import cn from "classnames";
 import { nanoid } from "nanoid";
 
 // Models
-import { JobPosition } from "models/JobPosition";
+import type { JobPosition } from "models/JobPosition";
 
 // Store
 import { addFilter } from "store/filterSlice";
+import { selectAllFilters } from "store/filterSlice";
 
 // Hooks
+import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
 
 // UI
@@ -20,14 +22,29 @@ interface JobCardProps {
 }
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
+  const filters = useAppSelector(selectAllFilters);
   const dispatch = useAppDispatch();
-  const skills = [job.role, job.level, ...job.languages, ...job.tools];
 
   // Handlers
   const addFilterHandler = (name: string) => {
     dispatch(addFilter({ name }));
+  };  
+
+  // Elements
+  const skills = [job.role, job.level, ...job.languages, ...job.tools];
+  const skillsElements = skills.map((skill) => (
+    <Chip
+      key={nanoid()}
+      text={skill}
+      variant="base"
+      onClick={() => addFilterHandler(skill)}
+    />
+  ));
+
+  // Effects
+  React.useEffect(() => {
     window.scroll(0, 0);
-  };
+  }, [filters]);
 
   return (
     <li
@@ -95,14 +112,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </div>
 
         <Stack className="flex flex-wrap gap-3 md:ml-auto">
-          {skills.map((skill) => (
-            <Chip
-              key={nanoid()}
-              text={skill}
-              variant="base"
-              onClick={() => addFilterHandler(skill)}
-            />
-          ))}
+          {skillsElements}
         </Stack>
       </div>
     </li>

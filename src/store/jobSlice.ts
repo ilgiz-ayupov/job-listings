@@ -1,30 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Models
-import { RootState } from "store";
-import { Filter } from "models/Filter";
+import type { RootState } from "store";
+import type { JobPosition } from "models/JobPosition";
+import type { Filter } from "models/Filter";
 
 // Data
 import jobsData from "data/jobs-positions.json";
 
-interface Job {
-  id: number;
-  company: string;
-  logo: string;
-  new: boolean;
-  featured: boolean;
-  position: string;
-  role: string;
-  level: string;
-  postedAt: string;
-  contract: string;
-  location: string;
-  languages: string[];
-  tools: string[];
-}
-
 interface JobState {
-  list: Job[];
+  list: JobPosition[];
 }
 
 const initialState: JobState = {
